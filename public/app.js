@@ -19,11 +19,13 @@ button.addEventListener('click', () => {
 
 // get meouw sound
 const meowAudio = document.getElementById('meow-audio');
+const meowSounds = ['cat-meow.mp3', 'cat-meow2.mp3', 'angry-cat-meow.mp3', 'funny-meow.mp3'];
 
-const playMeow = () => {
-    meowAudio.currentTime = 0;
-    meowAudio.play();
-}
+const playRandomMeow = () => {
+    const randomIndex = Math.floor(Math.random() * meowSounds.length);
+    const audio = new Audio(meowSounds[randomIndex]); // Create new audio object
+    audio.play();
+};
 
 // Function to "translate" text to meows and add audio
 const translateToMeows = (text) => {
@@ -33,7 +35,6 @@ const translateToMeows = (text) => {
     words.forEach((word) => {
         const meowSpan = document.createElement('span');
         meowSpan.textContent = 'meow ';
-        meowSpan.style.cursor = 'pointer';
 
         catContainer.appendChild(meowSpan);
     });
@@ -41,7 +42,7 @@ const translateToMeows = (text) => {
     // loop through the words and for each play the meow sound
     for (let i = 0; i < words.length; i++) {
         setTimeout(() => {
-            playMeow();
+            playRandomMeow();
         }, i * 500);
     }
 
